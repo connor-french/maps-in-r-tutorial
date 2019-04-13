@@ -42,6 +42,7 @@ library(rnaturalearth)
 
 Before you can visualize your data, you need to read it in. For this tutorial, we will use two types of data- a shapefile for our base map and latitude/longitude coordinates for our points of interest.
 
+<img src="https://ak9.picdn.net/shutterstock/videos/3168739/thumb/1.jpg" alt="A cute, chubby frog" width="200"/>
 ```{r}
 #reading in a map of brazil
 sa_map <- ne_countries(continent = "south america")
