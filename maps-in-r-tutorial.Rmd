@@ -18,7 +18,7 @@ This tutorial is aimed at folks used to performing GIS tasks on GUI platforms li
 
 **Plotting the map**
 
-If you haven't already, click [here](https://github.com/connor-french/maps-in-r-tutorial/archive/master.zip) to download the code and data for the tutorial. Just unzip the file, open the .Rmd file if you are using RStudio, or the .R file if you are running things from the command line or in base R. 
+All code can be executed by copying and pasting the below lines into an R console. You can download R for your system [here](https://cran.r-project.org/). However, if you have [RStudio](https://www.rstudio.com/products/rstudio/download/), click [here](https://github.com/connor-french/maps-in-r-tutorial/archive/master.zip) to download the code for the tutorial and run the notebook. Just unzip the file and double-click the .Rmd file! 
 
 ## Installing and loading packages
 If you need to use a package that isn't part of base R, you first need to install it. The install.packages() function is typically the safest and easiest way to install a package available in the CRAN repository. I put a hashmark in front of the function so it doesn't query the repository every time you want to run this code. Remove the hashmark to install, then you can either remove the line of code, or add a hashmark back in front.
@@ -30,34 +30,46 @@ writing raster or vector data. This is a wonderful package that can do most, if 
 We're also using the rnaturalearth package to load in the shapefile we'll need for our base map.
 ```{r}
 #Install the raster package. You only need to do this once.
-#install.packages(c("raster", "rnaturalearth"), dependencies = TRUE)
+#install.packages(c("raster", "rnaturalearth", "spocc"), dependencies = TRUE)
 
 
 #Load the raster and rnaturalearth packages. The order you load packages matters, because some packages use similar function names and the last loaded package supercedes priority for function name.
 library(raster)
 library(rnaturalearth)
+library(spocc)
 ```
 
 ## Reading in data
 
-Before you can visualize your data, you need to read it in. For this tutorial, we will use two types of data- a shapefile for our base map and latitude/longitude coordinates for our points of interest.
+Before you can visualize your data, you need to read it in to your environment. For this tutorial, we will use two types of data- a shapefile for our base map and latitude/longitude coordinates for our points of interest. While you can easily read in data that you have on your computer, we're grabbing some data available on the internet. Note- the arrow pointing to the left is assigning the output of the function on the right to the name on the left. Now, anytime you want to perform an operation on that output (for instance, plotting it!), you don't have to run the function again.
 
-<img src="https://ak9.picdn.net/shutterstock/videos/3168739/thumb/1.jpg" alt="A cute, chubby frog" width="200"/>
+Since I am partial to frogs, we're going to plot the distribution of the Rufous Frog, which is distributed across South America. 
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Leptodactylus_fuscus01c.jpg/270px-Leptodactylus_fuscus01c.jpg" alt="A cute frog" width="200"/>
 ```{r}
-#reading in a map of brazil
+#reading in a map of south america
 sa_map <- ne_countries(continent = "south america")
 
-#reading in csv file of the coordinates of the frog localities
-frog_locs <- read.csv("data/frog_localities.csv")
+#query a database to obtain our locality data
+frog_locs <- occ("Leptodactylus fuscus", from = "gbif", has_coords = TRUE)
+
+#convert our query to a dataframe that we can plot
+frog_locs <- occ2df(frog_locs)
+
+#tell R that the coordinates of this data set are the longitude and latitude variables
+coordinates(frog_locs) <- ~longitude + latitude
 
 ```
 
 
 ## Plotting the map
+This might be the easiest part of the process! There are many, many options to customize your map and many different packages that have their various pluses and minuses. However, a quick visualization of your data is obtainable with only two lines of code!
 
 ```{r}
+#plot the basemap 
 plot(sa_map)
-points(frog_locs, col = "darkgreen")
+
+#plot the frog localities, making the border black and the center green
+points(frog_locs, col = "black", bg = "darkgreen", pch = 21)
 ```
 
 
