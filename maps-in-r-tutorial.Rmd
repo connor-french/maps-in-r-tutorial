@@ -44,6 +44,7 @@ library(spocc)
 Before you can visualize your data, you need to read it in to your environment. For this tutorial, we will use two types of data- a shapefile for our base map and latitude/longitude coordinates for our points of interest. While you can easily read in data that you have on your computer, we're grabbing some data available on the internet. Note- the arrow pointing to the left is assigning the output of the function on the right to the name on the left. Now, anytime you want to perform an operation on that output (for instance, plotting it!), you don't have to run the function again.
 
 Since I am partial to frogs, we're going to plot the distribution of the Rufous Frog, a cute and chubby frog that is distributed across South America. 
+
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Leptodactylus_fuscus01c.jpg/270px-Leptodactylus_fuscus01c.jpg" alt="A cute frog" width="200"/>
 ```{r}
 #reading in a map of south america
