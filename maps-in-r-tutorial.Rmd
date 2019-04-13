@@ -16,7 +16,7 @@ This tutorial is aimed at folks used to performing GIS tasks on GUI platforms li
 
 **Reading in data**
 
-**Plotting the data**
+**Plotting the map**
 
 If you haven't already, click [here](https://github.com/connor-french/maps-in-r-tutorial/archive/master.zip) to download the code and data for the tutorial. Just unzip the file, open the .Rmd file if you are using RStudio, or the .R file if you are running things from the command line or in base R. 
 
@@ -25,15 +25,17 @@ If you need to use a package that isn't part of base R, you first need to instal
 
 After the package is installed, it's not quite ready to be used. To load a package into your session, use the library() function. 
 
-The package we're using in this tutorial is the raster package, a set of diverse tools for creating, reading, manipulating, and
+The main package we're using in this tutorial is the raster package, a set of diverse tools for creating, reading, manipulating, and
 writing raster or vector data. This is a wonderful package that can do most, if not all, of the raster manipulation tasks you regularly perform on a platform like ArcGIS or QGIS.
+We're also using the rnaturalearth package to load in the shapefile we'll need for our base map.
 ```{r}
 #Install the raster package. You only need to do this once.
-#install.packages("raster", dependencies = TRUE)
+#install.packages(c("raster", "rnaturalearth"), dependencies = TRUE)
 
 
-#Load the raster package. The order you load packages matters, because some packages use similar function names and the last loaded package supercedes priority for function name.
+#Load the raster and rnaturalearth packages. The order you load packages matters, because some packages use similar function names and the last loaded package supercedes priority for function name.
 library(raster)
+library(rnaturalearth)
 ```
 
 ## Reading in data
@@ -41,7 +43,22 @@ library(raster)
 Before you can visualize your data, you need to read it in. For this tutorial, we will use two types of data- a shapefile for our base map and latitude/longitude coordinates for our points of interest.
 
 ```{r}
-sa_map <- shapefile("data/SouthAmerica.shp")
+#reading in a map of brazil
+sa_map <- ne_countries(continent = "south america")
+
+#reading in csv file of the coordinates of the frog localities
+frog_locs <- read.csv("data/frog_localities.csv")
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Plotting the map
+
+```{r}
+plot(sa_map)
+points(frog_locs, col = "darkgreen")
+```
+
+
+
+
