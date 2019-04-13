@@ -38,10 +38,10 @@ library(raster)
 
 ## Reading in data
 
-Before you can visualize your data, you need to read it in.
+Before you can visualize your data, you need to read it in. For this tutorial, we will use two types of data- a shapefile for our base map and latitude/longitude coordinates for our points of interest.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+sa_map <- shapefile("data/SouthAmerica.shp")
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
