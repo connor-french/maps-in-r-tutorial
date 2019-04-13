@@ -1,5 +1,5 @@
 ---
-title: "Plotting Maps in R"
+title: "Plotting your first map in R"
 knit: (function(input_file, encoding) {
   out_dir <- 'docs';
   rmarkdown::render(input_file,
@@ -9,24 +9,36 @@ author: "Connor French"
 date: "4/12/2019"
 output: html_document
 ---
+## Overview
+This tutorial is aimed at folks used to performing GIS tasks on GUI platforms like ArcGIS or QGIS who want to explore R's potential as a powerful, more reproducible, system for spatial visualization and analysis. It assumes no previous command-line experience. The tutorial is organized in the following sections:
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+**Installing and loading packages**
+
+**Reading in data**
+
+**Plotting the data**
+
+If you haven't already, click [here](https://github.com/connor-french/maps-in-r-tutorial/archive/master.zip) to download the code and data for the tutorial. Just unzip the file, open the .Rmd file if you are using RStudio, or the .R file if you are running things from the command line or in base R. 
+
+## Installing and loading packages
+If you need to use a package that isn't part of base R, you first need to install it. The install.packages() function is typically the safest and easiest way to install a package available in the CRAN repository. I put a hashmark in front of the function so it doesn't query the repository every time you want to run this code. Remove the hashmark to install, then you can either remove the line of code, or add a hashmark back in front.
+
+After the package is installed, it's not quite ready to be used. To load a package into your session, use the library() function. 
+
+The package we're using in this tutorial is the raster package, a set of diverse tools for creating, reading, manipulating, and
+writing raster or vector data. This is a wonderful package that can do most, if not all, of the raster manipulation tasks you regularly perform on a platform like ArcGIS or QGIS.
+```{r}
+#Install the raster package. You only need to do this once.
+#install.packages("raster", dependencies = TRUE)
+
+
+#Load the raster package. The order you load packages matters, because some packages use similar function names and the last loaded package supercedes priority for function name.
+library(raster)
 ```
 
-## R Markdown
+## Reading in data
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
+Before you can visualize your data, you need to read it in.
 
 ```{r pressure, echo=FALSE}
 plot(pressure)
