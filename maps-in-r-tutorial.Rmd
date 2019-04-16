@@ -6,7 +6,7 @@ knit: (function(input_file, encoding) {
  encoding=encoding,
  output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
 author: "Connor French"
-date: "4/12/2019"
+date: "4/16/2019"
 output: html_document
 ---
 ## Overview
@@ -28,8 +28,8 @@ After the package is installed, it's not quite ready to be used. To load a packa
 The main package we're using in this tutorial is the raster package, a set of diverse tools for creating, reading, manipulating, and
 writing raster or vector data. This is a wonderful package that can do most, if not all, of the raster and vector manipulation tasks you regularly perform on a platform like ArcGIS or QGIS.
 We're also using the rnaturalearth package to load in the shapefile we'll need for our base map and spocc to obtain species occurrence localities that we want to visualize.
-```{r}
-#Install the raster package. You only need to do this once.
+```{r message=FALSE}
+#Install the raster package. You only need to do this once. The dependencies = TRUE argument tells the function to install any packages that are necessary to run the packages we are interested in.
 #install.packages(c("raster", "rnaturalearth", "spocc"), dependencies = TRUE)
 
 
@@ -47,16 +47,16 @@ Since I am partial to frogs, we're going to plot the distribution of the Rufous 
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Leptodactylus_fuscus01c.jpg/270px-Leptodactylus_fuscus01c.jpg" alt="A cute frog" width="200"/>
 ```{r}
-#reading in a map of south america
+#reading in a map of south america. Uses rnaturalearth package
 sa_map <- ne_countries(continent = "south america")
 
-#query a database to obtain our locality data
+#query a database to obtain our locality data. Uses spocc package.
 frog_locs <- occ("Leptodactylus fuscus", from = "gbif", has_coords = TRUE)
 
-#convert our query to a dataframe that we can plot
+#convert our query to a dataframe that we can plot. Uses spocc package.
 frog_locs <- occ2df(frog_locs)
 
-#tell R that the coordinates of this data set are the longitude and latitude variables
+#tell R that the coordinates of this data set are the longitude and latitude variables. Uses sp package (which is loaded with raster package)
 coordinates(frog_locs) <- ~longitude + latitude
 
 ```
@@ -66,13 +66,20 @@ coordinates(frog_locs) <- ~longitude + latitude
 This might be the easiest part of the process! There are many, many options to customize your map and many different packages that have their various pluses and minuses. However, a quick visualization of your data is obtainable with only two lines of code!
 
 ```{r}
-#plot the basemap 
+#plot the basemap. Uses raster package.
 plot(sa_map)
 
-#plot the frog localities, making the border black and the center green
+#plot the frog localities, making the border black and the center green. Uses raster package and base graphics.
 points(frog_locs, col = "black", bg = "darkgreen", pch = 21)
 ```
 
 
+### Some helpful resources
+Here are a few helpful resources for getting started in R and making beautiful maps!
 
+[Intro to R in RStudio](https://rstudio.cloud/learn/primers)
+
+[Making beautiful maps in R](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html)
+
+[Geocomputation with R](https://geocompr.robinlovelace.net/)
 
