@@ -31,9 +31,10 @@ We're also using the rnaturalearth package to load in the shapefile we'll need f
 
 Install our packages.
 ```{r}
-#Install the raster package. You only need to do this once. The dependencies = TRUE argument tells the function to install any packages that are necessary to run the packages we are interested in.
-#install.packages(c("raster", "rnaturalearth", "spocc"), dependencies = TRUE)
+#You only need to do this once. The dependencies = TRUE argument tells the function to install any packages that are necessary to run the packages we are interested in.
 
+
+#install.packages(c("raster", "rnaturalearth", "spocc"), dependencies = TRUE)
 ```
 
 Load the packages into our environment.

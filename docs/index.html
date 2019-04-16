@@ -210,7 +210,9 @@ $(document).ready(function () {
 <p>After the package is installed, it’s not quite ready to be used. To load a package into your session, use the library() function.</p>
 <p>The main package we’re using in this tutorial is the raster package, a set of diverse tools for creating, reading, manipulating, and writing raster or vector data. This is a wonderful package that can do most, if not all, of the raster and vector manipulation tasks you regularly perform on a platform like ArcGIS or QGIS. We’re also using the rnaturalearth package to load in the shapefile we’ll need for our base map and spocc to obtain species occurrence localities that we want to visualize.</p>
 <p>Install our packages.</p>
-<pre class="r"><code>#Install the raster package. You only need to do this once. The dependencies = TRUE argument tells the function to install any packages that are necessary to run the packages we are interested in.
+<pre class="r"><code>#You only need to do this once. The dependencies = TRUE argument tells the function to install any packages that are necessary to run the packages we are interested in.
+
+
 #install.packages(c(&quot;raster&quot;, &quot;rnaturalearth&quot;, &quot;spocc&quot;), dependencies = TRUE)</code></pre>
 <p>Load the packages into our environment.</p>
 <pre class="r"><code>#Load the raster and rnaturalearth packages. The order you load packages matters, because some packages use similar function names and the last loaded package supercedes priority for function name.
