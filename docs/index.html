@@ -209,11 +209,11 @@ $(document).ready(function () {
 <p>If you need to use a package that isn’t part of base R, you first need to install it. The install.packages() function is typically the safest and easiest way to install a package available in the CRAN repository. I put a hashmark in front of the function so it doesn’t query the repository and try to update the package every time you want to run this code. Remove the hashmark to install, then you can either remove the line of code, or add a hashmark back in front.</p>
 <p>After the package is installed, it’s not quite ready to be used. To load a package into your session, use the library() function.</p>
 <p>The main package we’re using in this tutorial is the raster package, a set of diverse tools for creating, reading, manipulating, and writing raster or vector data. This is a wonderful package that can do most, if not all, of the raster and vector manipulation tasks you regularly perform on a platform like ArcGIS or QGIS. We’re also using the rnaturalearth package to load in the shapefile we’ll need for our base map and spocc to obtain species occurrence localities that we want to visualize.</p>
+<p>Install our packages.</p>
 <pre class="r"><code>#Install the raster package. You only need to do this once. The dependencies = TRUE argument tells the function to install any packages that are necessary to run the packages we are interested in.
-#install.packages(c(&quot;raster&quot;, &quot;rnaturalearth&quot;, &quot;spocc&quot;), dependencies = TRUE)
-
-
-#Load the raster and rnaturalearth packages. The order you load packages matters, because some packages use similar function names and the last loaded package supercedes priority for function name.
+#install.packages(c(&quot;raster&quot;, &quot;rnaturalearth&quot;, &quot;spocc&quot;), dependencies = TRUE)</code></pre>
+<p>Load the packages into our environment.</p>
+<pre class="r"><code>#Load the raster and rnaturalearth packages. The order you load packages matters, because some packages use similar function names and the last loaded package supercedes priority for function name.
 library(raster)
 library(rnaturalearth)
 library(spocc)</code></pre>

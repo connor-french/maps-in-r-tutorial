@@ -28,11 +28,16 @@ After the package is installed, it's not quite ready to be used. To load a packa
 The main package we're using in this tutorial is the raster package, a set of diverse tools for creating, reading, manipulating, and
 writing raster or vector data. This is a wonderful package that can do most, if not all, of the raster and vector manipulation tasks you regularly perform on a platform like ArcGIS or QGIS.
 We're also using the rnaturalearth package to load in the shapefile we'll need for our base map and spocc to obtain species occurrence localities that we want to visualize.
-```{r message=FALSE}
+
+Install our packages.
+```{r}
 #Install the raster package. You only need to do this once. The dependencies = TRUE argument tells the function to install any packages that are necessary to run the packages we are interested in.
 #install.packages(c("raster", "rnaturalearth", "spocc"), dependencies = TRUE)
 
+```
 
+Load the packages into our environment.
+```{r message=FALSE}
 #Load the raster and rnaturalearth packages. The order you load packages matters, because some packages use similar function names and the last loaded package supercedes priority for function name.
 library(raster)
 library(rnaturalearth)
